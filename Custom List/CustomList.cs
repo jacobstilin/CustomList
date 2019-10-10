@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Custom_List
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable<T>
     {
         private T[] items;
 
         public CustomList()
         {
             items = new T[4];
+            capacity = 4;
+            count = 0;
         }
 
         public T this[int index]
@@ -49,6 +51,22 @@ namespace Custom_List
             }
             items[count] = itemToAdd;
             IncrementCount();
+        }
+
+        public void Remove(T itemToRemove)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i].Equals(itemToRemove))
+                {
+                    for (int y = i; y < (items.Length - i); y++)
+                    {
+                        items[y] = items[y + 1];
+                    }
+                    count -= 1;
+                    break;
+                }
+            }
         }
 
         private int count;
@@ -96,14 +114,45 @@ namespace Custom_List
             count += 1;
         }
 
-        public void Clear()
+        public override string ToString()
         {
-
+            string concatenatedString = "";
+            for (int i = 0; i < count; i++)
+            {
+                concatenatedString += items[i].ToString();
+            }
+            return concatenatedString;
         }
 
-       
+       public static CustomList<T> operator + (CustomList<T> listOne, CustomList<T> listTwo)
+        {
+            foreach (T item in listTwo)
+            {
+                listOne.Add(item);
+            }
+            return listOne;
+        }
 
+        public static CustomList<T> operator - (CustomList<T> listOne, CustomList<T> listTwo)
+        {
+            foreach (T item in listTwo)
+            {
+                listOne.Remove(item);
+            }
+            return listOne;
+        }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return items[i];
+            }
+        }
 
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }
