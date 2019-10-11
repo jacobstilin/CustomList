@@ -1,0 +1,48 @@
+
+
+Minus Operator Overload Writeup
+
+By Jacob Stilin
+
+Custom List Class Project
+
+The purpose of this overload is to allow the minus (-) operator to subtract the contents of one Custom List from another. 
+
+Parameters: Two Custom Lists, the second to be subtracted from the first.
+
+Returns: A new Custom List that is the result of subtracting the second Custom List from the first.
+
+Syntax:
+
+	 public static CustomList<T> operator - (CustomList<T> listOne, CustomList<T> listTwo)
+
+	 CustomListResult = CustomList1 - CustomList2;
+
+Example:
+
+	CustomList<string> CustomList1 = new CustomList<string>();	// First Custom List
+    CustomList<string> CustomList2 = new CustomList<string>();	// List to be subtracted from first Custom List
+    CustomList<string> ResultList = new CustomList<string>();	// Result
+
+	CustomList1.Add(1);
+	CustomList1.Add(2);
+	CustomList1.Add(3);
+	CustomList1.Add(4);
+	CustomList1.Add(5);
+
+	CustomList2.Add(3);
+	CustomList2.Add(4);
+	CustomList2.Add(5);
+	CustomList2.Add(6);
+	CustomList2.Add(7);
+
+	ResultList = CustomList1 - CustomList 2;
+	foreach (int item in ResultList)
+	{
+		Console.WriteLine(item);
+	}
+
+Output:
+	1
+	2
+	
