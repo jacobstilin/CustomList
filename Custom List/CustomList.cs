@@ -55,15 +55,19 @@ namespace Custom_List
 
         public void Remove(T itemToRemove)
         {
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (items[i].Equals(itemToRemove))
                 {
-                    for (int y = i; y < (items.Length - i); y++)
+                    DecrementCount();
+                    for (int y = i; y < (count + 1); y++)
                     {
+                        if (y == count)
+                        {
+                            break;
+                        }
                         items[y] = items[y + 1];
                     }
-                    count -= 1;
                     break;
                 }
             }
@@ -114,6 +118,11 @@ namespace Custom_List
             count += 1;
         }
 
+        public void DecrementCount()
+        {
+            count -=1 ;
+        }
+
         public override string ToString()
         {
             string concatenatedString = "";
@@ -135,11 +144,64 @@ namespace Custom_List
 
         public static CustomList<T> operator - (CustomList<T> listOne, CustomList<T> listTwo)
         {
-            foreach (T item in listTwo)
+            CustomList<T> result = new CustomList<T>();
+            CustomList<T> temp = new CustomList<T>();
+            temp = listTwo;
+
+            foreach (T item in listOne)
             {
-                listOne.Remove(item);
+                if (temp.Contains(item))
+                {
+                    temp.Remove(item);
+                }  
+                else
+                {
+                    result.Add(item);
+                }
             }
-            return listOne;
+            return result;
+        }
+
+        public CustomList<T> Zip (CustomList<T> listTwo)
+        {
+            CustomList<T> result = new CustomList<T>();
+            
+            if (count > listTwo.count)
+            {
+                for (int i = 0; i < listTwo.count; i++)
+                {
+                    result.Add(items[i]);
+                    result.Add(listTwo[i]);
+                }
+                for (int i = (count - listTwo.count); i < count; i++)
+                {
+                    result.Add(items[i]);
+                }
+            }
+
+            if(count < listTwo.count)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    result.Add(items[i]);
+                    result.Add(listTwo[i]);
+                }
+                for (int i = (listTwo.count - count); i < listTwo.count; i++)
+                {
+                    result.Add(items[i]);
+                }
+            }
+
+            if (count == listTwo.count)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    result.Add(items[i]);
+                    result.Add(listTwo[i]);
+                }
+            }
+                return result;
+            
         }
 
         public IEnumerator<T> GetEnumerator()

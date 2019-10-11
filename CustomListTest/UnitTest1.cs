@@ -250,6 +250,78 @@ namespace CustomListTest
             // assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void MinusOverload_Works()
+        {
+            // arrange
+            CustomList<string> testList1 = new CustomList<string>();
+            CustomList<string> testList2 = new CustomList<string>();
+            CustomList<string> testList3 = new CustomList<string>();
+            string expected = "yamotha";
+
+            // act
+            testList1.Add("aow");
+            testList1.Add("ya");
+            testList1.Add("motha");
+
+            testList2.Add("aow");
+            testList2.Add("a");
+            testList2.Add("wiseguyovaheya");
+            testList3 = testList1 - testList2;
+
+            string actual = testList3.ToString();
+
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Zip_CountRight()
+        {
+            // arrange
+            CustomList<int> oddTestList = new CustomList<int>();
+            CustomList<int> evenTestList = new CustomList<int>();
+            CustomList<int> resultTestList = new CustomList<int>();
+            int expected = 6;
+
+            // act
+            oddTestList.Add(1);
+            oddTestList.Add(3);
+            oddTestList.Add(5);
+
+            evenTestList.Add(2);
+            evenTestList.Add(4);
+            evenTestList.Add(6);
+            resultTestList = oddTestList.Zip(evenTestList);
+            int actual = resultTestList.Count;
+
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Zip_WorksNormally()
+        {
+            // arrange
+            CustomList<int> oddTestList = new CustomList<int>();
+            CustomList<int> evenTestList = new CustomList<int>();
+            CustomList<int> resultTestList = new CustomList<int>();
+            int expected = 3;
+            // act
+            oddTestList.Add(1);
+            oddTestList.Add(3);
+            oddTestList.Add(5);
+
+            evenTestList.Add(2);
+            evenTestList.Add(4);
+            evenTestList.Add(6);
+            resultTestList = oddTestList.Zip(evenTestList);
+            int actual = resultTestList[2];
+
+            // assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 
     // arrange
