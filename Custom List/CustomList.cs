@@ -173,7 +173,7 @@ namespace Custom_List
                     result.Add(items[i]);
                     result.Add(listTwo[i]);
                 }
-                for (int i = (count - listTwo.count); i < count; i++)
+                for (int i = (count - listTwo.count + 1); i < count; i++)
                 {
                     result.Add(items[i]);
                 }
@@ -186,9 +186,9 @@ namespace Custom_List
                     result.Add(items[i]);
                     result.Add(listTwo[i]);
                 }
-                for (int i = (listTwo.count - count); i < listTwo.count; i++)
+                for (int i = (listTwo.count - count + 1); i < listTwo.count; i++)
                 {
-                    result.Add(items[i]);
+                    result.Add(listTwo[i]);
                 }
             }
 
@@ -200,7 +200,23 @@ namespace Custom_List
                     result.Add(listTwo[i]);
                 }
             }
-                return result;
+
+            if (count == 0)
+            {
+                for (int i = 0; i < listTwo.count; i++)
+                {
+                    result.Add(listTwo[i]);
+                }
+            }
+
+            if (listTwo.count == 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    result.Add(items[i]);
+                }
+            }
+            return result;
             
         }
 
