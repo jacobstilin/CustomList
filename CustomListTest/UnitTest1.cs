@@ -121,6 +121,9 @@ namespace CustomListTest
         }
     }
 
+
+
+
     [TestClass]
     public class RemoveTests
     { 
@@ -252,6 +255,9 @@ namespace CustomListTest
         }
     }
 
+
+
+
     [TestClass]
     public class PlusOverloadTests
     {
@@ -342,7 +348,10 @@ namespace CustomListTest
             // assert
             Assert.AreEqual(expected, actual);
         }
-}
+    }
+
+
+
 
     [TestClass]
     public class MinusOverloadTests
@@ -422,6 +431,9 @@ namespace CustomListTest
             Assert.AreEqual(expected, actual);
         }
     }
+
+
+
 
     [TestClass]
     public class ZipTests
